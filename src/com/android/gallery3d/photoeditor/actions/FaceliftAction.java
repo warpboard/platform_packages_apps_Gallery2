@@ -24,7 +24,7 @@ import com.android.gallery3d.photoeditor.filters.FaceliftFilter;
 /**
  * An action handling facelift effect.
  */
-public class FaceliftAction extends EffectAction {
+public class FaceliftAction extends GooglePrivativeAction {
 
     private static final float DEFAULT_SCALE = 0.5f;
 

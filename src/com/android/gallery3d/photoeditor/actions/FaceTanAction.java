@@ -24,7 +24,7 @@ import com.android.gallery3d.photoeditor.filters.FaceTanFilter;
 /**
  * An action handling face tanning effect.
  */
-public class FaceTanAction extends EffectAction {
+public class FaceTanAction extends GooglePrivativeAction {
 
     private static final float DEFAULT_SCALE = 0.5f;
 
