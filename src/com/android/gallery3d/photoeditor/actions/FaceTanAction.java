@@ -28,16 +28,17 @@ public class FaceTanAction extends EffectAction {
 
     private static final float DEFAULT_SCALE = 0.5f;
 
+    final FaceTanFilter filter;
+
     private ScaleSeekBar scalePicker;
 
     public FaceTanAction(Context context, AttributeSet attrs) {
         super(context, attrs);
+        filter = new FaceTanFilter();
     }
 
     @Override
     public void doBegin() {
-        final FaceTanFilter filter = new FaceTanFilter();
-
         scalePicker = factory.createScalePicker(EffectToolFactory.ScalePickerType.GENERIC);
         scalePicker.setOnScaleChangeListener(new ScaleSeekBar.OnScaleChangeListener() {
 
@@ -58,5 +59,10 @@ public class FaceTanAction extends EffectAction {
     @Override
     public void doEnd() {
         scalePicker.setOnScaleChangeListener(null);
+    }
+
+    @Override
+    public boolean isPresent() {
+        return filter.isPresent();
     }
 }

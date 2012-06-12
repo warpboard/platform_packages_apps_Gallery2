@@ -113,6 +113,15 @@ public abstract class Filter implements Parcelable {
     protected void readFromParcel(Parcel in) {
     }
 
+    /**
+     * Checks if the effect is present in the system.
+     *
+     * @return boolean true if an action effect is present in the system and can be loaded
+     */
+    public boolean isPresent() {
+        return true;
+    }
+
     @Override
     public int describeContents() {
         return 0;
