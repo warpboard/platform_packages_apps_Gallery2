@@ -28,16 +28,17 @@ public class FaceliftAction extends EffectAction {
 
     private static final float DEFAULT_SCALE = 0.5f;
 
+    private final FaceliftFilter filter;
+
     private ScaleSeekBar scalePicker;
 
     public FaceliftAction(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.filter = new FaceliftFilter();
     }
 
     @Override
     public void doBegin() {
-        final FaceliftFilter filter = new FaceliftFilter();
-
         scalePicker = factory.createScalePicker(EffectToolFactory.ScalePickerType.GENERIC);
         scalePicker.setOnScaleChangeListener(new ScaleSeekBar.OnScaleChangeListener() {
 
@@ -58,5 +59,10 @@ public class FaceliftAction extends EffectAction {
     @Override
     public void doEnd() {
         scalePicker.setOnScaleChangeListener(null);
+    }
+
+    @Override
+    public boolean isPresent() {
+        return filter.isPresent();
     }
 }
