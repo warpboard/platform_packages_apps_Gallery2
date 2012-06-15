@@ -56,6 +56,7 @@ import com.android.gallery3d.ui.StaticBackground;
 import com.android.gallery3d.util.Future;
 import com.android.gallery3d.util.GalleryUtils;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class AlbumPage extends ActivityState implements GalleryActionBar.ClusterRunner,
@@ -190,6 +191,11 @@ public class AlbumPage extends ActivityState implements GalleryActionBar.Cluster
             }
         } else {
             mSelectionManager.toggle(item.getPath());
+
+            // Note: actually selected item is not necessarily the one
+            // identified by "slotIndex" argument, because an item could also
+            // be unselected by long press, not only be selected.
+            slotIndex = handleSingleItemSelection(slotIndex);
             mDetailsSource.findIndex(slotIndex);
             mAlbumView.invalidate();
         }
@@ -225,6 +231,11 @@ public class AlbumPage extends ActivityState implements GalleryActionBar.Cluster
             if (item == null) return;
             mSelectionManager.setAutoLeaveSelectionMode(true);
             mSelectionManager.toggle(item.getPath());
+
+            // Note: actually selected item is not necessarily the one
+            // identified by "slotIndex" argument, because an item could also
+            // be unselected by long press, not only be selected.
+            slotIndex = handleSingleItemSelection(slotIndex);
             mDetailsSource.findIndex(slotIndex);
             mAlbumView.invalidate();
         }
@@ -600,6 +611,18 @@ public class AlbumPage extends ActivityState implements GalleryActionBar.Cluster
                 mActivity.getStateManager().finishState(AlbumPage.this);
             }
         }
+    }
+
+    // We need to handle a specific use case when several album items were
+    // selected / unselected (perhaps many times), and finally only one album
+    // item is left selected.
+    private int handleSingleItemSelection(int slotIndex) {
+        ArrayList<Path> selectedPaths = mSelectionManager.getSelected(false);
+        if (selectedPaths.size() == 1) {
+            slotIndex = mSelectionManager.getSourceMediaSet().getIndexOfItem(selectedPaths.get(0), 0);
+        }
+
+        return slotIndex;
     }
 
     private class MyLoadingListener implements LoadingListener {
