@@ -56,6 +56,7 @@ import com.android.gallery3d.ui.StaticBackground;
 import com.android.gallery3d.util.Future;
 import com.android.gallery3d.util.GalleryUtils;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class AlbumPage extends ActivityState implements GalleryActionBar.ClusterRunner,
@@ -628,9 +629,21 @@ public class AlbumPage extends ActivityState implements GalleryActionBar.Cluster
 
         // If requested index is out of active window, suggest a valid index.
         // If there is no valid index available, return -1.
+        //
+        // Note: actually selected item is not necessarily the one identified
+        // by "indexHint" argument, because a single or long tap not only can
+        // select an item, but also unselected it as well.
         public int findIndex(int indexHint) {
             if (mAlbumDataAdapter.isActive(indexHint)) {
                 mIndex = indexHint;
+
+                // We need to handle a specific use case when several album
+                // items were selected / unselected (perhaps many times),
+                // and finally only one album item is left selected.
+                ArrayList<Path> selectedPaths = mSelectionManager.getSelected(false);
+                if (selectedPaths.size() == 1) {
+                    mIndex = mSelectionManager.getSourceMediaSet().getIndexOfItem(selectedPaths.get(0), 0);
+                }
             } else {
                 mIndex = mAlbumDataAdapter.getActiveStart();
                 if (!mAlbumDataAdapter.isActive(mIndex)) {
