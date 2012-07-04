@@ -388,10 +388,7 @@ public class PhotoDataAdapter implements PhotoPage.Model {
     public void setCurrentPhoto(Path path, int indexHint) {
         if (mItemPath == path) return;
         mItemPath = path;
-        mCurrentIndex = indexHint;
-        updateSlidingWindow();
-        updateImageCache();
-        fireModelInvalidated();
+        updateCurrentIndex(indexHint);
 
         // We need to reload content if the path doesn't match.
         MediaItem item = getCurrentMediaItem();
@@ -716,7 +713,7 @@ public class PhotoDataAdapter implements PhotoPage.Model {
                 mItemPath = null;
                 updateCurrentItem();
             } else {
-                mCurrentIndex = info.indexHint;
+                updateCurrentIndex(info.indexHint);
             }
 
             updateSlidingWindow();
@@ -744,8 +741,7 @@ public class PhotoDataAdapter implements PhotoPage.Model {
         private void updateCurrentItem() {
             if (mSize == 0) return;
             if (mCurrentIndex >= mSize) {
-                mCurrentIndex = mSize - 1;
-                mPhotoView.notifyOnNewImage();
+                updateCurrentIndex(mSize - 1);
                 mPhotoView.startSlideInAnimation(PhotoView.TRANS_SLIDE_IN_LEFT);
             } else {
                 mPhotoView.notifyOnNewImage();
