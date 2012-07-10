@@ -72,6 +72,7 @@ public class DoodleFilter extends Filter {
         Effect effect = getEffect(EffectFactory.EFFECT_BITMAPOVERLAY);
         effect.setParameter("bitmap", bitmap);
         effect.apply(src.texture(), src.width(), src.height(), dst.texture());
+        bitmap.recycle();
     }
 
     @Override
