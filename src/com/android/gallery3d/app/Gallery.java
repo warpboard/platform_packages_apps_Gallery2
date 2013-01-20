@@ -34,6 +34,7 @@ import com.android.gallery3d.R;
 import com.android.gallery3d.common.Utils;
 import com.android.gallery3d.data.DataManager;
 import com.android.gallery3d.data.MediaItem;
+import com.android.gallery3d.data.MediaObject;
 import com.android.gallery3d.data.MediaSet;
 import com.android.gallery3d.data.Path;
 import com.android.gallery3d.picasasource.PicasaSource;
@@ -186,7 +187,14 @@ public final class Gallery extends AbstractGalleryActivity implements OnCancelLi
                 Path setPath = dm.findPathByUri(uri, null);
                 MediaSet mediaSet = null;
                 if (setPath != null) {
-                    mediaSet = (MediaSet) dm.getMediaObject(setPath);
+                    MediaObject mediaObj = dm.getMediaObject(setPath);
+                    if (mediaObj != null && mediaObj instanceof MediaSet) {
+                        mediaSet = (MediaSet) mediaObj;
+                    } else {
+                        Toast.makeText(this,
+                                R.string.no_such_item, Toast.LENGTH_LONG).show();
+                        finish();
+                    }
                 }
                 if (mediaSet != null) {
                     if (mediaSet.isLeafAlbum()) {
