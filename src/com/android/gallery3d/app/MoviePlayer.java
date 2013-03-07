@@ -284,7 +284,9 @@ public class MoviePlayer implements
         }
         int position = mVideoView.getCurrentPosition();
         int duration = mVideoView.getDuration();
-        mController.setTimes(position, duration, 0, 0);
+        if (position <= duration) {
+            mController.setTimes(position, duration, 0, 0);
+        }
         return position;
     }
 
