@@ -17,17 +17,17 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name" msgid="1928079047368929634">"Galería"</string>
-    <string name="gadget_title" msgid="259405922673466798">"Picture frame"</string>
+    <string name="gadget_title" msgid="259405922673466798">"Marco de foto"</string>
     <string name="details_ms" msgid="940634969189855292">"%1$02d:%2$02d"</string>
     <string name="details_hms" msgid="3215779248094151255">"%1$d:%2$02d:%3$02d"</string>
     <string name="movie_view_label" msgid="3526526872644898229">"Reproductor de vídeo"</string>
-    <string name="loading_video" msgid="4013492720121891585">"Cargando vídeo…"</string>
-    <string name="loading_image" msgid="1200894415793838191">"Cargando imagen…"</string>
-    <string name="loading_account" msgid="928195413034552034">"Cargando cuenta..."</string>
+    <string name="loading_video" msgid="4013492720121891585">"Cargando vídeo\u2026"</string>
+    <string name="loading_image" msgid="1200894415793838191">"Cargando imagen\u2026"</string>
+    <string name="loading_account" msgid="928195413034552034">"Cargando cuenta\u2026"</string>
     <string name="resume_playing_title" msgid="8996677350649355013">"Reanudar vídeo"</string>
     <string name="resume_playing_message" msgid="5184414518126703481">"Reanudar reproducción a partir de %s ?"</string>
     <string name="resume_playing_resume" msgid="3847915469173852416">"Reanudar reproducción"</string>
-    <string name="loading" msgid="7038208555304563571">"Cargando..."</string>
+    <string name="loading" msgid="7038208555304563571">"Cargando\u2026"</string>
     <string name="fail_to_load" msgid="8394392853646664505">"Error al cargar"</string>
     <string name="fail_to_load_image" msgid="6155388718549782425">"No se puede cargar la imagen."</string>
     <string name="no_thumbnail" msgid="284723185546429750">"No hay miniaturas."</string>
@@ -35,8 +35,8 @@
     <string name="crop_save_text" msgid="152200178986698300">"Aceptar"</string>
     <string name="ok" msgid="5296833083983263293">"Aceptar"</string>
     <string name="multiface_crop_help" msgid="2554690102655855657">"Toca una cara para comenzar."</string>
-    <string name="saving_image" msgid="7270334453636349407">"Guardando imagen..."</string>
-    <string name="filtershow_saving_image" msgid="6659463980581993016">"Guardando imagen en <xliff:g id="ALBUM_NAME">%1$s</xliff:g> …"</string>
+    <string name="saving_image" msgid="7270334453636349407">"Guardando imagen\u2026"</string>
+    <string name="filtershow_saving_image" msgid="6659463980581993016">"Guardando imagen en <xliff:g id="ALBUM_NAME">%1$s</xliff:g> \u2026"</string>
     <string name="save_error" msgid="6857408774183654970">"Error al guardar la imagen recortada"</string>
     <string name="crop_label" msgid="521114301871349328">"Recortar"</string>
     <string name="trim_label" msgid="274203231381209979">"Recortar vídeo"</string>
@@ -45,9 +45,9 @@
     <string name="select_item" msgid="2816923896202086390">"Seleccionar elemento"</string>
     <string name="select_album" msgid="1557063764849434077">"Seleccionar álbum"</string>
     <string name="select_group" msgid="6744208543323307114">"Seleccionar grupo"</string>
-    <string name="set_image" msgid="2331476809308010401">"Establecer como..."</string>
+    <string name="set_image" msgid="2331476809308010401">"Establecer como\u2026"</string>
     <string name="set_wallpaper" msgid="8491121226190175017">"Establecer fondo de pantalla"</string>
-    <string name="wallpaper" msgid="140165383777262070">"Estableciendo fondo de pantalla..."</string>
+    <string name="wallpaper" msgid="140165383777262070">"Estableciendo fondo de pantalla\u2026"</string>
     <string name="camera_setas_wallpaper" msgid="797463183863414289">"Fondo de pantalla"</string>
     <string name="delete" msgid="2839695998251824487">"Borrar"</string>
   <plurals name="delete_selection">
@@ -89,7 +89,7 @@
     <string name="no_such_item" msgid="5315144556325243400">"No se ha podido encontrar el elemento."</string>
     <string name="edit" msgid="1502273844748580847">"Editar"</string>
     <string name="process_caching_requests" msgid="8722939570307386071">"Procesando solicitudes de almacenamiento en caché"</string>
-    <string name="caching_label" msgid="4521059045896269095">"Almacenando en caché..."</string>
+    <string name="caching_label" msgid="4521059045896269095">"Almacenando en caché\u2026"</string>
     <string name="crop_action" msgid="3427470284074377001">"Recortar"</string>
     <string name="trim_action" msgid="703098114452883524">"Recortar"</string>
     <string name="set_as" msgid="3636764710790507868">"Establecer como"</string>
@@ -153,7 +153,7 @@
     <string name="ffx_washout_color" msgid="8034075742195795219">"Litho"</string>
   <plurals name="make_albums_available_offline">
     <item quantity="one" msgid="2171596356101611086">"Haciendo que el álbum pueda verse sin conexión"</item>
-    <item quantity="other" msgid="4948604338155959389">"Haciendo que los álbumes puedan verse sin conexión..."</item>
+    <item quantity="other" msgid="4948604338155959389">"Haciendo que los álbumes puedan verse sin conexión\u2026"</item>
   </plurals>
     <string name="try_to_set_local_album_available_offline" msgid="2184754031896160755">"El elemento se ha almacenado de forma local y está disponible sin conexión."</string>
     <string name="set_label_all_albums" msgid="4581863582996336783">"Todos los álbumes"</string>
@@ -193,10 +193,10 @@
     <string name="no_external_storage" msgid="95726173164068417">"No hay almacenamiento externo disponible."</string>
     <string name="switch_photo_filmstrip" msgid="8227883354281661548">"Vista de tira de película"</string>
     <string name="switch_photo_grid" msgid="3681299459107925725">"Vista de cuadrícula"</string>
-    <string name="trimming" msgid="9122385768369143997">"Recortando..."</string>
-    <string name="please_wait" msgid="7296066089146487366">"Espera..."</string>
+    <string name="trimming" msgid="9122385768369143997">"Recortando\u2026"</string>
+    <string name="please_wait" msgid="7296066089146487366">"Espera\u2026"</string>
     <string name="save_into" msgid="4960537214388766062">"Guardando el vídeo recortado en el álbum:"</string>
     <string name="trim_too_short" msgid="751593965620665326">"No se puede recortar: el vídeo de destino es demasiado corto."</string>
-    <string name="pano_progress_text" msgid="1586851614586678464">"Creando panorámica..."</string>
+    <string name="pano_progress_text" msgid="1586851614586678464">"Creando panorámica\u2026"</string>
     <string name="save" msgid="613976532235060516">"Guardar"</string>
 </resources>
