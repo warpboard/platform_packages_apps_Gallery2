@@ -74,6 +74,8 @@ public class Wallpaper extends Activity {
         return size;
     }
 
+    private boolean mIsFromLauncher = false;
+
     @SuppressWarnings("fallthrough")
     @Override
     protected void onResume() {
@@ -87,6 +89,7 @@ public class Wallpaper extends Activity {
                             .setClass(this, DialogPicker.class)
                             .setType(IMAGE_TYPE);
                     startActivityForResult(request, STATE_PHOTO_PICKED);
+                    mIsFromLauncher = true;
                     return;
                 }
                 mState = STATE_PHOTO_PICKED;
@@ -100,7 +103,7 @@ public class Wallpaper extends Activity {
                 float spotlightY = (float) size.y / height;
                 Intent request = new Intent(CropImage.ACTION_CROP)
                         .setDataAndType(mPickedItem, IMAGE_TYPE)
-                        .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                        //.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                         .putExtra(CropImage.KEY_OUTPUT_X, width)
                         .putExtra(CropImage.KEY_OUTPUT_Y, height)
                         .putExtra(CropImage.KEY_ASPECT_X, width)
@@ -111,8 +114,10 @@ public class Wallpaper extends Activity {
                         .putExtra(CropImage.KEY_SCALE_UP_IF_NEEDED, true)
                         .putExtra(CropImage.KEY_NO_FACE_DETECTION, true)
                         .putExtra(CropImage.KEY_SET_AS_WALLPAPER, true);
-                startActivity(request);
-                finish();
+                startActivityForResult(request,0);
+                if(!mIsFromLauncher){
+                    finish();
+                }
             }
         }
     }
@@ -121,12 +126,22 @@ public class Wallpaper extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) {
             setResult(resultCode);
-            finish();
-            return;
+
         }
         mState = requestCode;
         if (mState == STATE_PHOTO_PICKED) {
+
+            if (resultCode != RESULT_OK) {
+                finish();
+                return;
+            } else {
             mPickedItem = data.getData();
+        }
+        } else if (mState == 0) {
+            if (resultCode == RESULT_OK) {
+                finish();
+                return;
+            }
         }
 
         // onResume() would be called next
