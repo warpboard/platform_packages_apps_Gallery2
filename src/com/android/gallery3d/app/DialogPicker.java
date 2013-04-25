@@ -21,6 +21,8 @@ import android.os.Bundle;
 
 import com.android.gallery3d.util.GalleryUtils;
 
+import android.view.MenuItem;
+
 public class DialogPicker extends PickerActivity {
 
     @Override
@@ -38,4 +40,21 @@ public class DialogPicker extends PickerActivity {
                 getDataManager().getTopSetPath(typeBits));
         getStateManager().startState(AlbumSetPage.class, data);
     }
+/*Description: Fixed the problem that a gallery not turn back to last UI when user executing following steps luncher--press menu--Wallpapers--Gallery--select a picture--press home action bar,this opreation should be back up last select picture screen
+
+Steps: 1. in luncher screen, press menu button.
+       2. select Wallpapers item.
+       3. select a picture.
+       4. press home action bar
+Result:gallery not bact to last ui*/
+    @Override
+   	 public boolean onOptionsItemSelected(MenuItem item) {
+        	if (item.getItemId() == android.R.id.home) {
+            	if (getStateManager().getStateCount() > 1) {
+                	getStateManager().getTopState().onBackPressed();
+            	}
+            	return true;
+        	}
+        	return super.onOptionsItemSelected(item);
+    	}
 }
