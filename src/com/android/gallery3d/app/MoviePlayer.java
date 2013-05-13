@@ -136,17 +136,10 @@ public class MoviePlayer implements
             }
         });
 
-        // The SurfaceView is transparent before drawing the first frame.
-        // This makes the UI flashing when open a video. (black -> old screen
-        // -> video) However, we have no way to know the timing of the first
-        // frame. So, we hide the VideoView for a while to make sure the
-        // video has been drawn on it.
-        mVideoView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mVideoView.setVisibility(View.VISIBLE);
-            }
-        }, BLACK_TIMEOUT);
+
+        // Black timeout code causes a unnecessary delay. 
+        // It is not necessary and slows down performance of the whole playback process
+        mVideoView.setVisibility(View.VISIBLE);
 
         setOnSystemUiVisibilityChangeListener();
         // Hide system UI by default
