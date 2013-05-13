@@ -36,6 +36,7 @@ import com.android.gallery3d.onetimeinitializer.GalleryWidgetMigrator;
 public class PhotoAppWidgetProvider extends AppWidgetProvider {
 
     private static final String TAG = "WidgetProvider";
+    private static WidgetDatabaseHelper helper;
 
     static RemoteViews buildWidget(Context context, int id, Entry entry) {
 
@@ -53,24 +54,23 @@ public class PhotoAppWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context,
             AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
+        if(helper == null) {
+            helper = new WidgetDatabaseHelper(context);
+        }
+
         if (ApiHelper.HAS_REMOTE_VIEWS_SERVICE) {
             // migrate gallery widgets from pre-JB releases to JB due to bucket ID change
             GalleryWidgetMigrator.migrateGalleryWidgets(context);
         }
 
-        WidgetDatabaseHelper helper = new WidgetDatabaseHelper(context);
-        try {
-            for (int id : appWidgetIds) {
-                Entry entry = helper.getEntry(id);
-                if (entry != null) {
-                    RemoteViews views = buildWidget(context, id, entry);
-                    appWidgetManager.updateAppWidget(id, views);
-                } else {
-                    Log.e(TAG, "cannot load widget: " + id);
-                }
+        for (int id : appWidgetIds) {
+            Entry entry = helper.getEntry(id);
+            if (entry != null) {
+                RemoteViews views = buildWidget(context, id, entry);
+                appWidgetManager.updateAppWidget(id, views);
+            } else {
+                Log.e(TAG, "cannot load widget: " + id);
             }
-        } finally {
-            helper.close();
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
@@ -130,10 +130,11 @@ public class PhotoAppWidgetProvider extends AppWidgetProvider {
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         // Clean deleted photos out of our database
-        WidgetDatabaseHelper helper = new WidgetDatabaseHelper(context);
-        for (int appWidgetId : appWidgetIds) {
-            helper.deleteEntry(appWidgetId);
+        if(helper != null) {
+            for (int appWidgetId : appWidgetIds) {
+                helper.deleteEntry(appWidgetId);
+            }
+            helper.close();
         }
-        helper.close();
     }
 }
