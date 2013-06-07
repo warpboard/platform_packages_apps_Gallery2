@@ -203,9 +203,13 @@ public final class Gallery extends AbstractGalleryActivity implements OnCancelLi
                 }
             } else {
                 Path itemPath = dm.findPathByUri(uri, contentType);
-                Path albumPath = dm.getDefaultSetOf(itemPath);
+                // Graceful recovery when no source is found for a URI.
+                Path albumPath = null;
+                if (itemPath != null){
+                    albumPath = dm.getDefaultSetOf(itemPath);
+                    data.putString(PhotoPage.KEY_MEDIA_ITEM_PATH, itemPath.toString());
+                }
 
-                data.putString(PhotoPage.KEY_MEDIA_ITEM_PATH, itemPath.toString());
 
                 // TODO: Make the parameter "SingleItemOnly" public so other
                 //       activities can reference it.

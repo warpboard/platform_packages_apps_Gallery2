@@ -167,6 +167,9 @@ public class DataManager implements StitchingChangeListener {
 
     public MediaObject getMediaObject(Path path) {
         synchronized (LOCK) {
+            // Graceful recovery when no source is found for a URI.
+            if (path == null) return null;
+
             MediaObject obj = path.getObject();
             if (obj != null) return obj;
 
