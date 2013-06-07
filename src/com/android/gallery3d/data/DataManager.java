@@ -167,6 +167,9 @@ public class DataManager implements StitchingChangeListener {
 
     public MediaObject getMediaObject(Path path) {
         synchronized (LOCK) {
+            // Graceful recovery when no source is found for a URI.
+            if (path == null) return null;
+
             MediaObject obj = path.getObject();
             if (obj != null) return obj;
 
@@ -277,6 +280,8 @@ public class DataManager implements StitchingChangeListener {
     }
 
     public Path getDefaultSetOf(Path item) {
+        // Graceful recovery when no source is found for a URI.
+        if (item == null) return null;
         MediaSource source = mSourceMap.get(item.getPrefix());
         return source == null ? null : source.getDefaultSetOf(item);
     }
