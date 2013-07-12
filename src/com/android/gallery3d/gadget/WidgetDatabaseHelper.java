@@ -138,20 +138,14 @@ public class WidgetDatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void restoreData(SQLiteDatabase db, ArrayList<Entry> data) {
-        db.beginTransaction();
-        try {
-            for (Entry entry : data) {
-                ContentValues values = new ContentValues();
-                values.put(FIELD_APPWIDGET_ID, entry.widgetId);
-                values.put(FIELD_WIDGET_TYPE, entry.type);
-                values.put(FIELD_IMAGE_URI, entry.imageUri);
-                values.put(FIELD_PHOTO_BLOB, entry.imageData);
-                values.put(FIELD_ALBUM_PATH, entry.albumPath);
-                db.insert(TABLE_WIDGETS, null, values);
-            }
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
+        for (Entry entry : data) {
+            ContentValues values = new ContentValues();
+            values.put(FIELD_APPWIDGET_ID, entry.widgetId);
+            values.put(FIELD_WIDGET_TYPE, entry.type);
+            values.put(FIELD_IMAGE_URI, entry.imageUri);
+            values.put(FIELD_PHOTO_BLOB, entry.imageData);
+            values.put(FIELD_ALBUM_PATH, entry.albumPath);
+            db.insert(TABLE_WIDGETS, null, values);
         }
     }
 
