@@ -48,7 +48,7 @@ __inline__ void flipHorizontal(char * source, int srcWidth, int srcHeight, char 
     }
 }
 
-__inline__ void flip_fun(int flip, char * source, int srcWidth, int srcHeight, char * destination, int dstWidth, int dstHeight){
+static inline void flip_fun(int flip, char * source, int srcWidth, int srcHeight, char * destination, int dstWidth, int dstHeight){
     int horiz = (flip & 1) != 0;
     int vert = (flip & 2) != 0;
     if (horiz && vert){
@@ -96,7 +96,7 @@ __inline__ void rotate270(char * source, int srcWidth, int srcHeight, char * des
 }
 
 // rotate == 1 is 90 degrees, 2 is 180, 3 is 270 (positive is CCW).
-__inline__ void rotate_fun(int rotate, char * source, int srcWidth, int srcHeight, char * destination, int dstWidth, int dstHeight){
+static inline void rotate_fun(int rotate, char * source, int srcWidth, int srcHeight, char * destination, int dstWidth, int dstHeight){
     switch( rotate )
     {
         case 1:
