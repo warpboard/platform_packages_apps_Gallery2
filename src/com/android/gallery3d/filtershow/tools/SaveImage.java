@@ -333,7 +333,10 @@ public class SaveImage {
             uri = resetToOriginalImageIfNeeded(preset, !flatten);
         }
         if (uri != null) {
-            return null;
+            if (mCallback != null) {
+                mCallback.onPreviewSaved(uri);
+            }
+            return uri;
         }
 
         resetProgress();
