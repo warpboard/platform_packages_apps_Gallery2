@@ -1036,6 +1036,10 @@ public class PhotoDataAdapter implements PhotoPage.Model {
                 if (info.version != version) {
                     info.reloadContent = true;
                     info.size = mSource.getMediaItemCount();
+
+                    if (mSize != info.size) {
+                        executeAndWait(new UpdateContent(info));
+                    }
                 }
                 if (!info.reloadContent) continue;
                 info.items = mSource.getMediaItem(
