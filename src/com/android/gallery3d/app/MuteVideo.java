@@ -63,8 +63,13 @@ public class MuteVideo {
                     SaveVideoFileUtils.insertContent(
                             mDstFileInfo, mActivity.getContentResolver(), mUri);
                 } catch (IOException e) {
-                    Toast.makeText(mActivity, mActivity.getString(R.string.video_mute_err),
-                            Toast.LENGTH_SHORT).show();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mActivity, mActivity.getString(R.string.video_mute_err),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 // After muting is done, trigger the UI changed.
                 mHandler.post(new Runnable() {
