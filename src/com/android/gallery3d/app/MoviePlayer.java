@@ -38,6 +38,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.VideoView;
+import android.os.SystemClock;
 
 import com.android.gallery3d.R;
 import com.android.gallery3d.common.ApiHelper;
@@ -94,6 +95,8 @@ public class MoviePlayer implements
 
     // If the time bar is visible.
     private boolean mShowing;
+
+    private long mLastSeekEventTime = 0;
 
     private Virtualizer mVirtualizer;
 
@@ -382,13 +385,19 @@ public class MoviePlayer implements
 
     @Override
     public void onSeekMove(int time) {
-        mVideoView.seekTo(time);
+        long now = SystemClock.elapsedRealtime();
+        if ((now - mLastSeekEventTime) > 250) {
+            mLastSeekEventTime = now;
+            mVideoView.seekTo(time);
+        }
     }
 
     @Override
     public void onSeekEnd(int time, int start, int end) {
         mDragging = false;
-        mVideoView.seekTo(time);
+        if ((time - mLastSeekEventTime) > 250) {
+            mVideoView.seekTo(time);
+        }
         setProgress();
     }
 
